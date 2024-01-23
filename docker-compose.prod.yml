@@ -1,0 +1,13 @@
+version: "3"
+services:
+        app:
+                build: 
+                   context: .
+                   args:
+                           - node_env=production
+                   
+                environment:
+                        - node_env=production
+                command: npm start       
+                
+

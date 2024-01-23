@@ -1,0 +1,31 @@
+version: "3"
+services:
+        app:
+                container_name: appcontainer
+
+                ports:
+                        - "4000:4000"
+                depends_on:
+                        - mongo
+                        - redis
+        mongo:
+                image: mongo
+                restart: always
+                volumes:
+                        - mongo-db:/data/db
+                environment:
+                        MONGO_INITDB_ROOT_USERNAME: root
+                        MONGO_INITDB_ROOT_PASSWORD: example
+
+        redis:
+                image: redis
+
+        nginx:
+                image: nginx:stable-alpine
+                ports:
+                        - "7070:80"
+                depends_on:
+                        - app
+
+volumes:
+        mongo-db:  
